@@ -1,17 +1,73 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    static void main() {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        IO.println("Hello and welcome!");
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            IO.println("i = " + i);
+public class Main {
+    void main(String[] args) {
+        try {
+            switch (args[1]) {
+                case "1" -> Calculator();
+                case "2" -> SecondExercise();
+                default -> throw new IllegalStateException("Unexpected value: " + args);
+            }
+        } catch (IllegalStateException e) {
+            throw new RuntimeException(e);
         }
     }
+
+    public void Calculator() {
+        Scanner HandInsert = new Scanner(System.in);
+        System.out.println("Simple Calc");
+        float fFirst = EnterFloatWithCheck("first", HandInsert);
+        float fSecond = EnterFloatWithCheck("second", HandInsert);
+        float fResult = ExecuteOperationWithCheck(HandInsert, fFirst, fSecond);
+        System.out.printf("Result:%.4f", fResult);
+        HandInsert.close();
+    }
+
+    public float EnterFloatWithCheck(String Pos, Scanner scan) {
+        boolean goodEnter = false;
+        float a = 0;
+        System.out.print("Enter " + Pos + " float number: ");
+        while (!goodEnter) try {
+            a = scan.nextFloat();
+            goodEnter = true;
+        } catch (Exception e) {
+            scan.next();
+            IO.print("Error while enter " + Pos + " float number\nEnter again: ");
+        }
+        return a;
+    }
+
+    public float ExecuteOperationWithCheck(Scanner scan, float a, float b) {
+        boolean goodEnter = false;
+        List<String> listOfOperations = List.of("+", "-", "/", "*");
+        String operation = "";
+        System.out.print("Select operation (+,-,/,*): ");
+        while (!goodEnter) try {
+            operation = scan.next();
+            if (listOfOperations.contains(operation)) {
+                goodEnter = true;
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            IO.print("Error operation (+,-,/,*)\nEnter again: ");
+        }
+        float result = switch (operation) {
+            case "+" -> a + b;
+            case "-" -> a - b;
+            case "*" -> a * b;
+            case "/" -> a / b;
+            default -> throw new IllegalStateException("Unexpected value: " + operation);
+        };
+        return result;
+    }
+
+    public void SecondExercise() {
+
+    }
+
 }
