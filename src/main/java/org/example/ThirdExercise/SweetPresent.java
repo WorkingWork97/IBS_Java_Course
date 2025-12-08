@@ -1,16 +1,14 @@
-package org.example;
+package org.example.ThirdExercise;
 
 public class SweetPresent {
     private String sweetName;
     private float sweetWeight;
     private float sweetPrice;
-    private String sweetSpecialParam;
 
-    public SweetPresent(String sweetName, float sweetWeight, float sweetPrice, String sweetSpecialParam) {
+    public SweetPresent(String sweetName, float sweetWeight, float sweetPrice) {
         this.sweetName = sweetName;
         this.sweetWeight = sweetWeight;
         this.sweetPrice = sweetPrice;
-        this.sweetSpecialParam = sweetSpecialParam;
     }
 
     public String getSweetName() {
@@ -25,10 +23,6 @@ public class SweetPresent {
         return sweetPrice;
     }
 
-    public String getSweetSpecialParam() {
-        return sweetSpecialParam;
-    }
-
     public void setSweetName(String sweetName) {
         this.sweetName = sweetName;
     }
@@ -41,11 +35,8 @@ public class SweetPresent {
         this.sweetPrice = sweetPrice;
     }
 
-    public void setSweetSpecialParam(String sweetSpecialParam) {
-        this.sweetSpecialParam = sweetSpecialParam;
-    }
     @Override
     public String toString(){
-        return "SweetName: "+sweetName;
+        return "SweetName: "+sweetName+"; SweetWeight: "+sweetWeight+"; SweetPrice:"+sweetPrice;
     }
 }
