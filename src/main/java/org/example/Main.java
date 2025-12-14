@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.OOPCalculator.Calculator;
 import org.example.ThirdExercise.ThirdExcerciseClass;
 
 import java.util.Scanner;
@@ -12,6 +13,7 @@ public class Main {
                 case "1" -> new CalculatorFirstExercise();
                 case "2" -> new SecondExercise(HandInsert);
                 case "3" -> new ThirdExcerciseClass();
+                case "4" -> new Calculator(4);
                 default -> throw new IllegalStateException("Unexpected value: " + args);
             }
         } catch (IllegalStateException e) {
