@@ -14,6 +14,7 @@ public class Main {
                 case "2" -> new SecondExercise(HandInsert);
                 case "3" -> new ThirdExcerciseClass();
                 case "4" -> new Calculator(4);
+                case "5" -> new FifthExercise("FS/ListOfWords.txt");
                 default -> throw new IllegalStateException("Unexpected value: " + args);
             }
         } catch (IllegalStateException e) {
