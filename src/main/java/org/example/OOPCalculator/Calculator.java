@@ -4,15 +4,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Calculator implements operator {
+    private final int precision;
     Scanner HandInsert = new Scanner(System.in);
     private double first;
     private double second;
+    private double result;
 
     public Calculator(int precision) {
-        System.out.println("Simple Calc OOP");
-        this.setFirst();
-        this.setSecond();
-        System.out.printf("Result: %%.%df".formatted(precision), this.executeOperationWithCheck());
+        this.precision = precision;
     }
 
     public double getFirst() {
@@ -23,12 +22,20 @@ public class Calculator implements operator {
         this.first = EnterDoubleWithCheck("First");
     }
 
+    public void setFirst(double a) {
+        this.first = a;
+    }
+
     public double getSecond() {
         return second;
     }
 
     public void setSecond() {
         this.second = EnterDoubleWithCheck("Second");
+    }
+
+    public void setSecond(double b) {
+        this.second = b;
     }
 
     private float EnterDoubleWithCheck(String Pos) {
@@ -45,7 +52,23 @@ public class Calculator implements operator {
         return a;
     }
 
-    private double executeOperationWithCheck() {
+    public double getResult() {
+        return result;
+    }
+
+    public void PrintResult() {
+        System.out.printf("Result: %%.%df".formatted(this.precision), this.result);
+    }
+
+    public void setResult(double result) {
+        this.result = result;
+    }
+
+    public void setResult() {
+        executeOperationWithCheck();
+    }
+
+    private void executeOperationWithCheck() {
         boolean goodEnter = false;
         List<String> listOfOperations = List.of("+", "-", "/", "*");
         String operation = "";
@@ -60,13 +83,20 @@ public class Calculator implements operator {
         } catch (Exception e) {
             IO.print("Error operation (+,-,/,*)\nEnter again: ");
         }
-        return switch (operation) {
+        executeOperation(operation);
+    }
+
+    public void executeOperation(String operation) {
+        setResult(switch (operation) {
             case "+" -> operator.add(this.getFirst(), this.getSecond());
             case "-" -> operator.sub(this.getFirst(), this.getSecond());
             case "*" -> operator.pow(this.getFirst(), this.getSecond());
             case "/" -> operator.div(this.getFirst(), this.getSecond());
             default -> throw new IllegalStateException("Unexpected value: " + operation);
-        };
+        });
+    }
+    public void PrintStartMessage(){
+        System.out.println("Simple Calc OOP");
     }
 }
 
@@ -85,7 +115,6 @@ interface operator {
 
     static double div(double a, double b) {
         double result = 0;
-
         try {
             if (b == 0) {
                 throw new ArithmeticException();

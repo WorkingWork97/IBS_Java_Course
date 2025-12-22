@@ -13,7 +13,14 @@ public class Main {
                 case "1" -> new CalculatorFirstExercise();
                 case "2" -> new SecondExercise(HandInsert);
                 case "3" -> new ThirdExcerciseClass();
-                case "4" -> new Calculator(4);
+                case "4" -> {
+                    Calculator calculator = new Calculator(4);
+                    calculator.PrintStartMessage();
+                    calculator.setFirst();
+                    calculator.setSecond();
+                    calculator.setResult();
+                    calculator.PrintResult();
+                }
                 case "5" -> new FifthExercise("FS/ListOfWords.txt");
                 default -> throw new IllegalStateException("Unexpected value: " + args);
             }
