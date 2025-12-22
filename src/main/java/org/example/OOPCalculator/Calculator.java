@@ -84,6 +84,17 @@ interface operator {
     }
 
     static double div(double a, double b) {
-        return a / b;
+        double result = 0;
+
+        try {
+            if (b == 0) {
+                throw new ArithmeticException();
+            } else {
+                result = a / b;
+            }
+        } catch (Exception e) {
+            IO.print("Error dividing by zero\n");
+        }
+        return result;
     }
 }
